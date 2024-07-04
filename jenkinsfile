@@ -2,11 +2,12 @@ pipeline {
     agent any
 
     tools {
-      jdk "openjdk11"
+    //   jdk "openjdk11"
       maven "mvn398"
     }
 
     stages {
+
          stage("Clean Workspace"){
             steps{
                 cleanWs()
