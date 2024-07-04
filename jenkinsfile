@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-    //   jdk "openjdk11"
+      jdk "openjdk11"
       maven "mvn398"
     }
 
@@ -52,7 +52,7 @@ pipeline {
             steps{
                 sh """
                 aws deploy create-deployment --application-name Java-App \
-                --deployment-group-name Java-App-DG \
+                --deployment-group-name Java-App-DG \ 
                 --s3-location bucket=himalaya-artifacts,key=todo-project/artifact-${env.BUILD_NUMBER}.tar.gz,bundleType=tar 
                 
                 """
