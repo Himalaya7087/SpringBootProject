@@ -37,7 +37,9 @@ pipeline {
                   cp -rf target/project-0.1.8.jar temp_jar
                   cp -rf scripts temp_jar
                   cp appspec.yml temp_jar
-                  tar -cvzf artifact-${env.BUILD_NUMBER}.tar.gz temp_jar/*
+                  cd temp_jar
+                  tar -cvzf ../artifact-${env.BUILD_NUMBER}.tar.gz ./*
+                  cd ..
                   aws s3 cp  artifact-${env.BUILD_NUMBER}.tar.gz s3://himalaya-artifacts/todo-project/
                 """
                 // Run Maven on a Unix agent.
