@@ -51,10 +51,7 @@ pipeline {
          stage("Deploy to EC2"){
             steps{
                 sh """
-                aws deploy create-deployment --application-name Java-App \
-                --deployment-group-name Java-App-DG \ 
-                --s3-location bucket=himalaya-artifacts,key=todo-project/artifact-${env.BUILD_NUMBER}.tar.gz,bundleType=tar 
-                
+                aws deploy create-deployment --application-name Java-App --deployment-group-name Java-App-DG --s3-location bucket=himalaya-artifacts,key=todo-project/artifact-${env.BUILD_NUMBER}.tar.gz,bundleType=tar 
                 """
             }
         }
