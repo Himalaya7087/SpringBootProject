@@ -34,7 +34,7 @@ pipeline {
             steps {
               sh"""
                   mkdir temp_jar;
-                  cp -rf target/project-0.1.8.jar temp_build
+                  cp -rf target/project-0.1.8.jar temp_jar
                   cp -rf scripts temp_jar
                   cp appspec.yml temp_jar
                   tar -cvzf artifact-${env.BUILD_NUMBER}.tar.gz temp_jar/*
