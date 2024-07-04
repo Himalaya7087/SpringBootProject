@@ -31,13 +31,31 @@ pipeline {
         
         stage('s3-upload') {
             steps {
-            
+              sh"""
+                  mkdir temp_jar;
+                  cp -rf target/project-0.1.8.jar temp_build
+                  cp -rf scripts temp_jar
+                  cp appspec.yml temp_jar
+                  tar -cvzf artifact-${env.BUILD_NUMBER}.tar.gz temp_jar/*
+                  aws s3 cp  artifact-${env.BUILD_NUMBER}.tar.gz s3://himalaya-artifacts/todo-project/
+                """
                 // Run Maven on a Unix agent.
-                 sh "tar -cvzf artifact-${env.BUILD_NUMBER}.tar.gz target/*.jar"
-                 sh "aws s3 cp  artifact-${env.BUILD_NUMBER}.tar.gz s3://himalaya-artifacts/todo-project/"
+                //  sh "tar -cvzf artifact-${env.BUILD_NUMBER}.tar.gz target/*.jar"
+                //  sh "aws s3 cp  artifact-${env.BUILD_NUMBER}.tar.gz s3://himalaya-artifacts/todo-project/"
             }
 
             
+        }
+
+         stage("Deploy to EC2"){
+            steps{
+                sh """
+                aws deploy create-deployment --application-name Java-App \
+                --deployment-group-name Java-App-DG \
+                --s3-location bucket=himalaya-artifacts,key=todo-project/artifact-${env.BUILD_NUMBER}.tar.gz,bundleType=tar 
+                
+                """
+            }
         }
     }
 }
