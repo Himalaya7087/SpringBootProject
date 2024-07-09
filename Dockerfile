@@ -1,5 +1,5 @@
 FROM openjdk:11
 WORKDIR /java
-COPY target/*.jar .
+COPY target/project-0.1.8.jar .
 EXPOSE 8080
-ENTRYPOINT [ "sleep 5000" ]
+ENTRYPOINT [ "java -jar /java/project-0.1.8.jar" ]
