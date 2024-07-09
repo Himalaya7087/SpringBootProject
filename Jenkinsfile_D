@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    tools {
+      jdk "openjdk11"
+      maven "mvn398"
+    }
+
+    stages {
+
+         stage("Clean Workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        
+        stage("Checkout") {
+            steps {
+                git branch: 'main', url: 'https://github.com/Himalaya7087/SpringBootProject.git', credentialsId:'PASS'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+            
+                // Run Maven on a Unix agent.
+                sh "mvn clean package"
+            }
+
+            
+        }
+        stage('Create-Image') {
+            steps {
+            
+                // Run Maven on a Unix agent.
+                sh "docker build . -t java-image"
+            }
+
+            
+        }
+        
+        
+    }
+}
