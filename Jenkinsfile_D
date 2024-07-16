@@ -42,7 +42,7 @@ pipeline {
             steps {
             
                 // Run Maven on a Unix agent.
-                sh "docker push himalaya7087/java-image"
+                sh "docker push himalaya7087/java-image:latest"
             }
 
             
