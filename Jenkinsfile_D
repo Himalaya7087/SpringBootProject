@@ -33,7 +33,7 @@ pipeline {
             steps {
             
                 // Run Maven on a Unix agent.
-                sh "docker build . -t java-image"
+                sh "docker build . -t himalaya7087/java-image"
             }
 
             
@@ -42,7 +42,7 @@ pipeline {
             steps {
             
                 // Run Maven on a Unix agent.
-                sh "docker push Himalaya7087/openjdk:11"
+                sh "docker push himalaya7087/java-image"
             }
 
             
