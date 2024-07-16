@@ -42,7 +42,7 @@ pipeline {
             steps {
             
                 // Run Maven on a Unix agent.
-                sh "docker push Himalaya70870/openjdk:11"
+                sh "docker push Himalaya7087/openjdk:11"
             }
 
             
