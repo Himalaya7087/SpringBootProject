@@ -38,7 +38,15 @@ pipeline {
 
             
         }
-        
+          stage('Push-Image') {
+            steps {
+            
+                // Run Maven on a Unix agent.
+                sh "docker push Himalaya70870/openjdk:11"
+            }
+
+            
+        }
         
     }
 }
